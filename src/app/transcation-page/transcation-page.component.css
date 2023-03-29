@@ -1,0 +1,7 @@
+.table_wrapper{
+    width: 100%;
+    overflow-x: auto;
+}
+.mat-mdc-table{
+    white-space: nowrap;
+}

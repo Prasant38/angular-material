@@ -1,0 +1,243 @@
+<div class="wrapper">
+	<mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start">
+		<mat-tab label="Transcation Monitor">
+			<div class="card">
+				<div class="card-body">
+					<form class="filterForm" [formGroup]="filterForm" (ngSubmit)="onSubmit()">
+						<div class="d-flex">
+							<div class="px-1">
+								<mat-form-field>
+									<mat-label>Transaction ID</mat-label>
+									<input matInput formControlName="transaction_id" />
+								</mat-form-field>
+							</div>
+							<div class="px-1">
+								<mat-form-field>
+									<mat-label>Account</mat-label>
+									<input matInput formControlName="account" />
+								</mat-form-field>
+							</div>
+							<div class="px-1">
+								<mat-form-field>
+									<input matInput placeholder="Start Date" [matDatepicker]="StartDate"
+										(click)="StartDate.open()" (keypress)="keyPress($event, 'date')"
+										formControlName="start_date">
+									<mat-datepicker-toggle matSuffix [for]="StartDate"></mat-datepicker-toggle>
+									<mat-datepicker #StartDate></mat-datepicker>
+								</mat-form-field>
+							</div>
+							<div class="px-1">
+								<mat-form-field>
+									<input matInput placeholder="End Date" [matDatepicker]="EndDate"
+										(click)="EndDate.open()" (keypress)="keyPress($event, 'date')"
+										formControlName="end_date">
+									<mat-datepicker-toggle matSuffix [for]="EndDate"></mat-datepicker-toggle>
+									<mat-datepicker #EndDate></mat-datepicker>
+								</mat-form-field>
+							</div>
+							<div class="px-1">
+								<mat-form-field>
+									<mat-select formControlName="originator" placeholder="Originator">
+										<mat-option value="0">All</mat-option>
+										<mat-option value="1">one</mat-option>
+										<mat-option value="2">two</mat-option>
+										<mat-option value="3">three</mat-option>
+									</mat-select>
+								</mat-form-field>
+							</div>
+							<div class="px-1">
+								<mat-form-field>
+									<mat-select formControlName="location" placeholder="Location">
+										<mat-option value="0">All</mat-option>
+										<mat-option value="1">Bangalore</mat-option>
+										<mat-option value="2">Delhi</mat-option>
+										<mat-option value="3">Mumbai</mat-option>
+									</mat-select>
+								</mat-form-field>
+							</div>
+						</div>
+						<div class="d-flex">
+							<div class="px-1">
+								<mat-form-field>
+									<mat-select formControlName="status" placeholder="Status">
+										<mat-option value="0">All</mat-option>
+										<mat-option value="1">Pending</mat-option>
+										<mat-option value="2">Completed</mat-option>
+										<mat-option value="3">Failed</mat-option>
+									</mat-select>
+								</mat-form-field>
+							</div>
+							<div class="px-1">
+								<mat-form-field>
+									<mat-select formControlName="form" placeholder="Form">
+										<mat-option value="0">All</mat-option>
+										<mat-option value="1">In progress</mat-option>
+										<mat-option value="2">Done</mat-option>
+									</mat-select>
+								</mat-form-field>
+							</div>
+							<div class="px-1">
+								<mat-form-field>
+									<mat-label>RT</mat-label>
+									<input matInput formControlName="rt" />
+								</mat-form-field>
+							</div>
+							<div class="px-1">
+								<mat-form-field>
+									<mat-label>DDA</mat-label>
+									<input matInput formControlName="dda" />
+								</mat-form-field>
+							</div>
+							<div class="px-1">
+								<mat-form-field>
+									<mat-label>Check Amount</mat-label>
+									<input matInput formControlName="check_amount" />
+								</mat-form-field>
+							</div>
+							<div class="px-1">
+								<mat-form-field>
+									<mat-label>ATM Location</mat-label>
+									<input matInput formControlName="atm_location" />
+								</mat-form-field>
+							</div>
+						</div>
+						<div class="d-flex">
+							<div class="px-1">
+								<mat-form-field>
+									<mat-select formControlName="transaction_type" placeholder="Transaction Type">
+										<mat-option value="0">All</mat-option>
+										<mat-option value="1">Cash</mat-option>
+										<mat-option value="2">Card</mat-option>
+									</mat-select>
+								</mat-form-field>
+							</div>
+							<div class="px-1">
+								<mat-form-field class="md-block col mr-1">
+									<input matInput placeholder="Deposit Amount" #currency
+										formControlName="deposit_amount">
+									<mat-button-toggle-group matSuffix name="fontStyle" aria-label="Font Style"
+										formControlName="deposit_amount_operator">
+										<mat-button-toggle [value]="0">=</mat-button-toggle>
+										<mat-button-toggle [value]="1"> &lt;= </mat-button-toggle> <mat-button-toggle
+											[value]="2">>=
+										</mat-button-toggle>
+									</mat-button-toggle-group>
+								</mat-form-field>
+							</div>
+							<div class="px-1">
+								<mat-form-field>
+									<mat-select formControlName="reason_code" placeholder="Reason code">
+										<mat-option value="0">All</mat-option>
+										<mat-option value="1">Reason 1</mat-option>
+										<mat-option value="2">Reason 2</mat-option>
+									</mat-select>
+								</mat-form-field>
+							</div>
+							<div class="px-1 pt-2">
+								<button mat-raised-button color="primary">Search</button>
+								<button class="ms-2" mat-raised-button color="warn">Reset</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+			<div class="card mt-2">
+				<div class="card-body">
+					<div class="d-flex">
+						<div class="px-1">
+							<mat-form-field>
+								<mat-label>Filter</mat-label>
+								<input matInput (keyup)="applyFilter($event)" placeholder="Search..." #input>
+							</mat-form-field>
+						</div>
+						<div class="px-1 pt-2">
+							<button class="ms-2" mat-fab extended color="primary">
+								<mat-icon>download</mat-icon>
+								Download Excel</button>
+						</div>
+					</div>
+					<div class="table_wrapper">
+						<table mat-table [dataSource]="dataSource" matSort>
+							<ng-container matColumnDef="transaction_id">
+								<th class="text-muted fw-normal" mat-header-cell *matHeaderCellDef mat-sort-header>Transcation ID</th>
+								<td mat-cell *matCellDef="let element"> {{element.transaction_id }} </td>
+							</ng-container>
+							<ng-container matColumnDef="account">
+								<th class="text-muted fw-normal" mat-header-cell *matHeaderCellDef mat-sort-header>Account</th>
+								<td mat-cell *matCellDef="let element">{{ element.account}}</td>
+							</ng-container>
+							<ng-container matColumnDef="start_date">
+								<th class="text-muted fw-normal" mat-header-cell *matHeaderCellDef mat-sort-header>Start Date</th>
+								<td mat-cell *matCellDef="let element">{{ element.start_date | date: 'MM/dd/yyyy h:mm a' }} </td>
+							</ng-container>
+							<ng-container matColumnDef="end_date">
+								<th class="text-muted fw-normal" mat-header-cell *matHeaderCellDef mat-sort-header>End Date </th>
+								<td mat-cell *matCellDef="let element"> {{element.end_date | date: 'MM/dd/yyyy h:mm a' }}</td>
+							</ng-container>
+							<ng-container matColumnDef="originator">
+								<th class="text-muted fw-normal" mat-header-cell *matHeaderCellDef mat-sort-header>Originator</th>
+								<td mat-cell *matCellDef="let element" style="width: 100px;">{{ element.originator }} </td>
+							</ng-container>
+							<ng-container matColumnDef="location">
+								<th class="text-muted fw-normal" mat-header-cell *matHeaderCellDef mat-sort-header>Location</th>
+								<td mat-cell *matCellDef="let element"> {{element.location }}</td>
+							</ng-container>
+							<ng-container matColumnDef="status">
+								<th class="text-muted fw-normal" mat-header-cell *matHeaderCellDef mat-sort-header>Status</th>
+								<td mat-cell *matCellDef="let element">{{element.status}} </td>
+							</ng-container>
+							<ng-container matColumnDef="form">
+								<th class="text-muted fw-normal" mat-header-cell *matHeaderCellDef mat-sort-header>Form</th>
+								<td mat-cell *matCellDef="let element"> {{element.form}}</td>
+							</ng-container>
+							<ng-container matColumnDef="rt">
+								<th class="text-muted fw-normal" mat-header-cell *matHeaderCellDef mat-sort-header>RT</th>
+								<td mat-cell *matCellDef="let element"> {{element.rt}}
+								</td>
+							</ng-container>
+							<ng-container matColumnDef="dda">
+								<th class="text-muted fw-normal" mat-header-cell *matHeaderCellDef mat-sort-header>DDA</th>
+								<td mat-cell *matCellDef="let element" class="text-center"> {{element.dda}} </td>
+							</ng-container>
+							<ng-container matColumnDef="check_amount">
+								<th class="text-muted fw-normal" mat-header-cell *matHeaderCellDef mat-sort-header>Check Amount</th>
+								<td mat-cell *matCellDef="let element" class="text-center"> {{element.check_amount }} </td>
+							</ng-container>
+							<ng-container matColumnDef="atm_location">
+								<th class="text-muted fw-normal" mat-header-cell *matHeaderCellDef mat-sort-header>ATM Location</th>
+								<td mat-cell *matCellDef="let element">{{element.atm_location | uppercase }} </td>
+							</ng-container>
+							<ng-container matColumnDef="transaction_type">
+								<th class="text-muted fw-normal" mat-header-cell *matHeaderCellDef mat-sort-header>Transcation Type</th>
+								<td mat-cell *matCellDef="let element">{{element.transaction_type }} </td>
+							</ng-container>
+							<ng-container matColumnDef="deposit_amount">
+								<th class="text-muted fw-normal" mat-header-cell *matHeaderCellDef mat-sort-header>Deposit Amount</th>
+								<td mat-cell *matCellDef="let element">{{element.deposit_amount}} </td>
+							</ng-container>
+							<ng-container matColumnDef="reason_code">
+								<th class="text-muted fw-normal" mat-header-cell *matHeaderCellDef mat-sort-header>Reason Code</th>
+								<td mat-cell *matCellDef="let element">{{element.reason_code}} </td>
+							</ng-container>
+							<tr mat-header-row *matHeaderRowDef="displayedColumns" class="total-amount-gradient"></tr>
+							<tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+							<!-- Row shown when there is no matching data. -->
+							<tr class="mat-row" *matNoDataRow>
+								<td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+							</tr>
+						</table>
+						<mat-paginator fxLayoutAlign="end end" [pageSizeOptions]="[10, 25, 50]"
+							showFirstLastButtons></mat-paginator>
+					</div>
+				</div>
+			</div>
+
+
+		</mat-tab>
+		<mat-tab label="Research">Content 2</mat-tab>
+		<mat-tab label="Report">Content 3</mat-tab>
+		<mat-tab label="System Configuration">Content 3</mat-tab>
+		<mat-tab label="Utilities">Content 3</mat-tab>
+		<mat-tab label="Admin">Content 3</mat-tab>
+	</mat-tab-group>
+</div>

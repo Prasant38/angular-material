@@ -1,0 +1,17 @@
+.mat-toolbar-multiple-rows{
+    min-height: unset;
+}
+.mat-toolbar-row{
+    height: unset;
+    padding: unset;
+}
+/* Header Style Starts */
+.header{
+    width: 100%;
+    background-color: #214b8f;
+    color: #fff;
+    overflow: hidden;
+}
+.header h1{
+    display: inline-block;
+}
