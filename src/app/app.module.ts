@@ -6,14 +6,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from './modules/material.module';
 
-import { TranscationPageComponent } from './transcation-page/transcation-page.component';
+import { TransactionPageComponent } from './transaction-page/transaction-page.component';
 import { TableComponent } from './components/table/table.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    TranscationPageComponent,
+    TransactionPageComponent,
     TableComponent
   ],
   imports: [

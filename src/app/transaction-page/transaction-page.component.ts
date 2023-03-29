@@ -3,11 +3,11 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 
 @Component({
-	selector: 'app-transcation-page',
-	templateUrl: './transcation-page.component.html',
-	styleUrls: ['./transcation-page.component.css']
+	selector: 'app-transaction-page',
+	templateUrl: './transaction-page.component.html',
+	styleUrls: ['./transaction-page.component.css']
 })
-export class TranscationPageComponent {
+export class TransactionPageComponent {
 	currentDate: any = new Date();
 	submit: boolean = false;
 	filterForm: FormGroup;
