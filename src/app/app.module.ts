@@ -7,12 +7,14 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from './modules/material.module';
 
 import { TranscationPageComponent } from './transcation-page/transcation-page.component';
+import { TableComponent } from './components/table/table.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    TranscationPageComponent
+    TranscationPageComponent,
+    TableComponent
   ],
   imports: [
     BrowserModule,
