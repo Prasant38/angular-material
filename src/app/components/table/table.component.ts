@@ -38,4 +38,10 @@ export class TableComponent {
 		this.dataSource.sort = this.sort;
 	}
 
+  viewTransaction(column: any){
+    // alert('1')
+    this.metaData.tabs.push('Transaction ID');
+    this.metaData.selected.setValue(this.metaData.tabs.length - 1);
+  }
+
 }

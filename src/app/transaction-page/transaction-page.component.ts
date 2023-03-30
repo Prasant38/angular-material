@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import {MatDialog, MatDialogRef} from '@angular/material/dialog';
-
 @Component({
 	selector: 'app-transaction-page',
 	templateUrl: './transaction-page.component.html',
@@ -11,9 +10,12 @@ export class TransactionPageComponent {
 	currentDate: any = new Date();
 	submit: boolean = false;
 	filterForm: FormGroup;
-
+	selected = new FormControl(0);
+	tabs = ['TransactionList'];
 	heroData = [
 		{
+			tabs : ['TransactionList'],
+			selected : new FormControl(0),
 			dataSource: [
 				{
 					"transaction_id": "123456",
@@ -31,6 +33,91 @@ export class TransactionPageComponent {
 					"transaction_type": "Transaction Type 1",
 					"deposit_amount": "51.00",
 					"reason_code": "Reason Code 1",
+					"transaction_id_detail":{
+						"location":"MDC",
+						"total_deposit":"$7.31",
+						"deposit_slip":"1",
+						"check":"1",
+						"Originator":"ML Client",
+						"Business Date":"03/22/2023",
+						"Scanned":"03/22/2023 2:06 PM",
+						"Rcvd by ML Edits":"03/22/2023 2:06 PM",
+						"Completed By ML Edits":"03/22/2023 2:06 PM",
+						"Sent to Post":""
+					},
+					"deposit_slip":{
+						"amount": "$12.64",
+						"account": "02222222",
+						"service": "",
+						"type": "",
+						"lastname": "",
+						"f1": "",
+						"last4digits": "",
+						"accountlookup": "red",
+						"stopfile": "yellow",
+						"productedit": "green",
+						"retirement":"",
+						"deposit_slip_specs":{
+								"Form_ID":"999",
+								"Deposit_Type":"Loan Payment",
+								"Plan name":"BAC",
+								"Status":"Failed"
+						},
+						"Contributions":{
+							"Last_Name":"",
+							"F1":"",
+							"Account":"022222222",
+							"Amount":"$12.64",
+							"Service":"",
+							"Type":"",
+							"Rmv":"",
+							"Account_Lookup":"Red",
+							"Stop_File":"Yellow",
+							"Product_validation":"Green",
+							"Retirement_Validation":""
+						},
+						"ID 0000000":"Image_Path"
+					},
+					"check":{
+						"Amount":"$7.31",
+						"ABA":"000123",
+						"DDA":"000123",
+						"Serial_number":"1234567",
+						"check_type":"percieved",
+						"pps":"000",
+						"checking":
+						{
+							"date":"03/22/2023",
+							"entity":""
+						},
+						"returned":{
+							"method":"",
+							"returned_date":"03/22/2023",
+							"Returned_rejection":""
+						},
+						"Account_Lookup":"",
+						"stop_file":"",
+						"check_specifics":{
+							"original_amount":"$1.03",
+							"adjusted_amount":"22333",
+							"merit_line":"333",
+							"onus":"33",
+							"aux":"33",
+							"miscellanious":""
+						},
+						"clearing":{
+							"date_cleared":"",
+							"entity":"",
+							"method":"",
+							"clearing_adjustment":""
+						},
+						"return":
+						{
+							"returned_date":"03/22/2023",
+							"returned_reason":""
+						},
+						"ID:WS000111111":"Path to reciept"
+					}
 				},
 				{
 					"transaction_id": "1234567",
@@ -264,7 +351,12 @@ export class TransactionPageComponent {
 					"reason_code": "Reason Code 15"
 				}
 			],
-			columns: [
+			columns: [		
+				{
+					field: 'view',
+					label: 'View Transaction',
+					type: 'button'
+				},		
 				{
 					field: 'transaction_id',
 					label: 'Transaction ID',
@@ -341,7 +433,7 @@ export class TransactionPageComponent {
 					type: 'string'
 				}
 			],
-			displayedColumns: ['transaction_id', 'account', 'start_date', 'end_date', 'originator', 'location', 'status', 'form', 'rt', 'dda', 'check_amount', 'atm_location', 'transaction_type', 'deposit_amount', 'reason_code'],
+			displayedColumns: ['view', 'transaction_id', 'account', 'start_date', 'end_date', 'originator', 'location', 'status', 'form', 'rt', 'dda', 'check_amount', 'atm_location', 'transaction_type', 'deposit_amount', 'reason_code'],
 			filter: {
 				label: 'Filter',
 				placeholder: 'Search...'

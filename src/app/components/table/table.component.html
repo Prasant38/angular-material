@@ -17,6 +17,13 @@
         <table mat-table [dataSource]="dataSource" matSort>
             <ng-container matColumnDef="{{column.field}}" *ngFor="let column of metaData.columns">
                 <th class="text-muted fw-normal" mat-header-cell *matHeaderCellDef mat-sort-header>{{column.label}}</th>
+                <ng-container *ngIf="column.type == 'button'">
+                    <td mat-cell *matCellDef="let element"> 
+                        <div class="px-1 pt-2">
+                            <button mat-raised-button color="primary" (click) = "viewTransaction(column)">{{column.field}}</button>
+                        </div>
+                    </td>                   
+                </ng-container>
                 <ng-container *ngIf="column.type == 'string'">
                     <td mat-cell *matCellDef="let element"> {{element[column.field]}} </td>
                 </ng-container>
